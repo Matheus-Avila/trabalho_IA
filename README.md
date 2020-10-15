@@ -3,7 +3,7 @@
 ## Descrição
 
 Projeto desenvolvido para o trabalho da disciplina de Inteligência Artificial(DCC014) da UFJF(Universidade Federal de Juiz de Fora).
-O trabalho tem o objetivo de comparar vários algoritmos de busca no problema de labirinto.
+O trabalho tem o objetivo de comparar vários algoritmos de busca na solução do problema do labirinto.
 
 ### Descrição do problema
 
@@ -17,4 +17,11 @@ Encontrar um caminho através de um labirinto tentando exaustivamente todas as r
 * Busca em largura
 * Busca em profundidade limitada 
 * Busca ordenada 
+
+2. Métodos informados
+
+* Busca Gulosa
+* Busca A*
+* Busca IDA*
+
 
