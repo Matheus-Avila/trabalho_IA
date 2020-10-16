@@ -1,11 +1,7 @@
+#include "Labirinto.h"
+
 #ifndef _Node_h_
-
-
-struct coordenadas {
-  int x;
-  int y;
-};
-
+#define _Node_h_
 
 class Node
 {
@@ -18,7 +14,7 @@ private:
 
 
 public:
-    Node(char acao, int x, int y, Node& pai);
+    Node(char acao, int x, int y, Node* pai);
     ~Node();
     void set_coords(int x, int y);
     int get_coordx();
@@ -29,7 +25,7 @@ public:
 
 };
 
-Node::Node(char acao, int x, int y, Node *pai){
+Node::Node(char acao, int x, int y, Node* pai){
     this->acao = acao;
     this->coord.x = x;
     this->coord.y = y;

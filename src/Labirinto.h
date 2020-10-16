@@ -4,6 +4,8 @@
 
 using namespace std;
 
+#ifndef _Labirinto_h_
+#define _Labirinto_h_
 struct coordenadas {
     int x;
     int y;
@@ -55,3 +57,4 @@ void Labirinto::set_labirinto(string arquivo){
     }
     arq.close();
 }
+#endif
