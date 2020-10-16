@@ -79,19 +79,13 @@ void Labirinto::le_saida(string labSaida)
 
 }
 
-const vector<string> explode(const string& s, const char& c)
-{
-	string buff{""};
-	vector<string> v;
-	
-	for(auto n:s)
-	{
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
-	}
-	if(buff != "") v.push_back(buff);
-	
-	return v;
+string removeEspacos (string str){
+    std::string output;
+    output.reserve(str.size()); // optional, avoids buffer reallocations in the loop
+    for(size_t i = 0; i < str.size(); ++i)
+        if(str[i] != ' ') output += str[i];
+
+    return output;
 }
 
 void Labirinto::set_labirinto(string arquivo)
@@ -110,19 +104,18 @@ void Labirinto::set_labirinto(string arquivo)
         getline(arq, line);
         le_saida(line);
 
+        //guarda as linhas do labirinto
         vector<string> lines;
         while(getline(arq, line)){
             lines.push_back(line);
         }
-        vector<string> v{explode(lines[0], ' ')};
 
-        cout << "size:" << v.size() << endl;
-        for(int i = 0; i < v.size(); i++){
-            cout << v[i] << " " << i << endl;
-        }
-        cout << "ultima pos.:" << v[v.size() - 1] << endl;
-        //grid = new bool[lines.size() + 1][]
+        lines[0] = removeEspacos(lines[0]);
 
+        int linhas = lines.size();
+        int colunas = lines[0].size();
+
+        grid = new bool[linhas][colunas];
     }
     arq.close();
 }
