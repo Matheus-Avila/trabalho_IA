@@ -76,14 +76,15 @@ void Labirinto::le_saida(string labSaida)
     pos = labSaida.find(' ');
     token = labSaida.substr(0, pos);
     this->saida.y = stoi(token, nullptr, 10);
-
 }
 
-string removeEspacos (string str){
+string removeEspacos(string str)
+{
     std::string output;
-    output.reserve(str.size()); // optional, avoids buffer reallocations in the loop
-    for(size_t i = 0; i < str.size(); ++i)
-        if(str[i] != ' ') output += str[i];
+    output.reserve(str.size());
+    for (size_t i = 0; i < str.size(); ++i)
+        if (str[i] != ' ')
+            output += str[i];
 
     return output;
 }
@@ -106,16 +107,33 @@ void Labirinto::set_labirinto(string arquivo)
 
         //guarda as linhas do labirinto
         vector<string> lines;
-        while(getline(arq, line)){
+        while (getline(arq, line))
             lines.push_back(line);
-        }
 
-        lines[0] = removeEspacos(lines[0]);
+        for (int i = 0; i < lines.size(); i++){
+            lines[i] = removeEspacos(lines[i]);
+            cout << lines[i] << endl;
+        }
 
         int linhas = lines.size();
         int colunas = lines[0].size();
 
-        grid = new bool[linhas][colunas];
+        cout << "colunas: " << colunas << endl;
+        //inicializa o grid
+        grid = new bool *[linhas];
+        for (int i = 0; i < linhas; i++)
+            grid[i] = new bool[colunas];
+
+        //converte as entradas do arquivo para o grid de bools
+        for (int i = 0; i < linhas; i++)
+        {
+            for (int j = 0; j < colunas; j++)
+            {
+                grid[i][j] = (lines[i][j] == '0') ? true : false;
+                cout << grid[i][j] << " ";
+            }
+            cout << endl;
+        }
     }
     arq.close();
 }
