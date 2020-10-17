@@ -85,7 +85,8 @@ string removeEspacos(string str)
     output.reserve(str.size());
     size_t i;
     for (size_t i = 0; i < str.size(); i++)
-        if (str[i] != ' '){
+        if (str[i] != ' ')
+        {
             output += str[i];
         }
     cout << "ultimo indice: " << output[i - 1] << endl;
@@ -123,14 +124,8 @@ void Labirinto::set_labirinto(string arquivo)
 
         //converte as entradas do arquivo para o grid de bools
         for (int i = 0; i < linhas; i++)
-        {
             for (int j = 0; j < colunas; j++)
-            {
                 grid[i][j] = (lines[i][j] == '0') ? true : false;
-                cout << grid[i][j] << " ";
-            }
-            cout << endl;
-        }
     }
     arq.close();
 }
