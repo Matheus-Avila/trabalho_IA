@@ -7,6 +7,7 @@ using namespace std;
 
 #ifndef _Labirinto_h_
 #define _Labirinto_h_
+
 struct coordenadas
 {
     int x;
@@ -82,10 +83,12 @@ string removeEspacos(string str)
 {
     std::string output;
     output.reserve(str.size());
-    for (size_t i = 0; i < str.size(); ++i)
-        if (str[i] != ' ')
+    size_t i;
+    for (size_t i = 0; i < str.size(); i++)
+        if (str[i] != ' '){
             output += str[i];
-
+        }
+    cout << "ultimo indice: " << output[i - 1] << endl;
     return output;
 }
 
@@ -110,15 +113,9 @@ void Labirinto::set_labirinto(string arquivo)
         while (getline(arq, line))
             lines.push_back(line);
 
-        for (int i = 0; i < lines.size(); i++){
-            lines[i] = removeEspacos(lines[i]);
-            cout << lines[i] << endl;
-        }
-
         int linhas = lines.size();
-        int colunas = lines[0].size();
+        int colunas = lines[0].size() - 1;
 
-        cout << "colunas: " << colunas << endl;
         //inicializa o grid
         grid = new bool *[linhas];
         for (int i = 0; i < linhas; i++)
