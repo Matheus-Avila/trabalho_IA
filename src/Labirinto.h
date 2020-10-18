@@ -7,6 +7,7 @@ using namespace std;
 
 #ifndef _Labirinto_h_
 #define _Labirinto_h_
+
 struct coordenadas
 {
     int x;
@@ -27,6 +28,7 @@ public:
     void set_labirinto(string arquivo);
     coordenadas get_saida();
     coordenadas get_entrada();
+    bool** get_grid();
     ~Labirinto();
 };
 
@@ -46,6 +48,10 @@ coordenadas Labirinto::get_entrada()
 coordenadas Labirinto::get_saida()
 {
     return saida;
+}
+
+bool** Labirinto::get_grid(){
+    return this->grid;
 }
 
 void Labirinto::le_entrada(string labEntrada)
