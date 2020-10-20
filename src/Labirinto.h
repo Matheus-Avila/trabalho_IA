@@ -18,6 +18,8 @@ class Labirinto
 {
 private:
     bool **grid;
+    int linhas;
+    int colunas;
     coordenadas entrada;
     coordenadas saida;
     void le_entrada(string labEntrada);
@@ -29,6 +31,11 @@ public:
     coordenadas get_saida();
     coordenadas get_entrada();
     bool** get_grid();
+    bool podeMoverCima(int x, int y);
+    bool podeMoverBaixo(int x, int y);
+    bool podeMoverDireita(int x, int y);
+    bool podeMoverEsquerda(int x, int y);
+
     ~Labirinto();
 };
 
@@ -38,6 +45,38 @@ Labirinto::Labirinto()
 
 Labirinto::~Labirinto()
 {
+}
+
+bool Labirinto::podeMoverCima(int x, int y){
+
+    if(x > 0){
+        return grid[x - 1][y];
+    }
+    return false;
+}
+
+bool Labirinto::podeMoverBaixo(int x, int y){
+
+    if(x < linhas - 1){
+        return grid[x + 1][y];
+    }
+    return false;
+}
+
+bool Labirinto::podeMoverDireita(int x, int y){
+
+    if(y < colunas - 1){
+        return grid[x][y + 1];
+    }
+    return false;
+}
+
+bool Labirinto::podeMoverEsquerda(int x, int y){
+
+    if(y > 0){
+        return grid[x][y - 1];
+    }
+    return false;
 }
 
 coordenadas Labirinto::get_entrada()
@@ -100,7 +139,7 @@ string removeEspacos(string str)
 
 void Labirinto::set_labirinto(string arquivo)
 {
-    //fazer a leitura do arquivo e colocar no grid
+    //faz a leitura do arquivo e coloca no grid
     ifstream arq(arquivo);
     string line;
 
@@ -119,8 +158,8 @@ void Labirinto::set_labirinto(string arquivo)
         while (getline(arq, line))
             lines.push_back(line);
 
-        int linhas = lines.size();
-        int colunas = lines[0].size() - 1;
+        this->linhas = lines.size();
+        this->colunas = lines[0].size() - 1;
 
         //inicializa o grid
         grid = new bool *[linhas];

@@ -11,10 +11,6 @@ private:
     char acao;
     static int custo; //1
     int fat_ramificacao;
-    Node** lista_filhos;// Quando nos chegarmos em um nó vamos precisar saber quais filhos ele tem
-    //e qual a prioridade??
-    int status;//aberto ou fechado. já foi expandido
-
 
 public:
     Node(char acao, int x, int y, Node* pai);
@@ -25,8 +21,7 @@ public:
     void set_ramificacao(int ramificacao);
     int get_ramificacao();
     char get_acao();
-    void expande_node();//Preencher a lista de filhos 
-
+    Node* getPai();
 };
 
 Node::Node(char acao, int x, int y, Node* pai){
@@ -38,6 +33,10 @@ Node::Node(char acao, int x, int y, Node* pai){
 
 Node::~Node(){
 
+}
+
+Node* Node::getPai(){
+    return pai;
 }
 
 char Node::get_acao(){
