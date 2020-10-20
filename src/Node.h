@@ -15,7 +15,6 @@ private:
 public:
     Node(char acao, int x, int y, Node* pai);
     ~Node();
-    void set_coords(int x, int y);
     int get_coordx();
     int get_coordy();
     void set_ramificacao(int ramificacao);
@@ -48,11 +47,6 @@ int Node::get_coordx(){
 
 int Node::get_coordy(){
     return this->coord.y;
-}
-
-void Node::set_coords(int x, int y){
-    this->coord.x = x;
-    this->coord.y = y;
 }
 
 void Node::set_ramificacao(int ramificacao){
