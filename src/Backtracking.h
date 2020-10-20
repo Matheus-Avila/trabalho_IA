@@ -42,12 +42,13 @@ void Backtracking::backtracking(Labirinto lab)
 
     if(solution != NULL){
         Node* aux = solution;
+        string moves;
 
         while(aux != NULL){
-            cout << aux->get_acao() << " ";
+            moves.insert(0,1, aux->get_acao());
             aux = aux->getPai();
         }
-        cout << endl;
+        cout << moves << endl;
     }
     else{
         cout << "Nao tem solucao" << endl;
