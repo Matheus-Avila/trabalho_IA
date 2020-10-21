@@ -160,7 +160,7 @@ void Labirinto::set_labirinto(string arquivo)
 
         this->linhas = lines.size();
         this->colunas = lines[0].size();
-        cout << "colunas: " << colunas << endl;
+        
         //inicializa o grid
         grid = new bool *[linhas];
         for (int i = 0; i < linhas; i++)

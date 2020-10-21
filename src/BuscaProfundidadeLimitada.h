@@ -80,7 +80,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
             {
                 Node *noFilho = new Node('C', x - 1, y, atual);
                 try
-                {
+                { 
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
                     return resultado;
                 }
@@ -92,7 +92,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
 
             if (lab.podeMoverBaixo(x, y) && (atual->get_acao() != 'C'))
             {
-                Node *noFilho = new Node('C', x + 1, y, atual);
+                Node *noFilho = new Node('B', x + 1, y, atual);
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
@@ -106,7 +106,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
 
             if (lab.podeMoverDireita(x, y) && (atual->get_acao() != 'E'))
             {
-                Node *noFilho = new Node('C', x, y + 1, atual);
+                Node *noFilho = new Node('D', x, y + 1, atual);
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
@@ -120,7 +120,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
 
             if (lab.podeMoverEsquerda(x, y)&& (atual->get_acao() != 'D'))
             {
-                Node *noFilho = new Node('C', x, y - 1, atual);
+                Node *noFilho = new Node('E', x, y - 1, atual);
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
