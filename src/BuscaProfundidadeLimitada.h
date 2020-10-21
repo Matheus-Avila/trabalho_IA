@@ -30,7 +30,7 @@ void BuscaProfundidadeLimitada::busca_profundidade_limitada(Labirinto lab, int l
 {
     try
     {
-        Node *raiz = new Node('X', lab.get_entrada().x, lab.get_entrada().y, NULL);
+        Node *raiz = new Node('x', lab.get_entrada().x, lab.get_entrada().y, NULL);
         Node *solution = recursiveDLS(lab, raiz, limite);
         if (solution != NULL)
         {
@@ -67,6 +67,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
     { 
         if (limite == 0)
         {
+            cout << "TESTE" << endl;
             throw 2;
         }
         else
@@ -82,7 +83,8 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 try
                 { 
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
-                    return resultado;
+                    if(resultado != NULL)
+                        return resultado;
                 }
                 catch (int e)
                 {
@@ -96,7 +98,8 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
-                    return resultado;
+                    if(resultado != NULL)
+                        return resultado;
                 }
                 catch (int e)
                 {
@@ -110,7 +113,8 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
-                    return resultado;
+                    if(resultado != NULL)
+                        return resultado;
                 }
                 catch (int e)
                 {
@@ -124,7 +128,8 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 try
                 {
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
-                    return resultado;
+                    if(resultado != NULL)
+                        return resultado;
                 }
                 catch (int e)
                 {
@@ -134,6 +139,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
 
             if (limite_atingido)
             {
+                cout << "TESTE" << endl;
                 throw 2;
             }
             else

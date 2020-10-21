@@ -10,7 +10,6 @@ using namespace std;
 
 int main()
 {
-
     Labirinto *lab = new Labirinto();
     lab->set_labirinto("Labirintos/lab2.txt");
 
@@ -21,8 +20,7 @@ int main()
     bl->busca_largura(*lab);
 
     BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
-    bp->busca_profundidade_limitada(*lab, 45);
-
+    bp->busca_profundidade_limitada(*lab, 8);
 
     return 0;
 }
