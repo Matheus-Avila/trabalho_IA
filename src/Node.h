@@ -9,7 +9,7 @@ private:
     coordenadas coord;
     Node* pai;
     char acao;
-    static int custo; //1
+    int custo;
     int fat_ramificacao;
 
 public:
@@ -20,6 +20,8 @@ public:
     void set_ramificacao(int ramificacao);
     int get_ramificacao();
     char get_acao();
+    void setCusto(int custo);
+    int getCusto();
     Node* getPai();
 };
 
@@ -55,5 +57,13 @@ void Node::set_ramificacao(int ramificacao){
 
 int Node::get_ramificacao(){
     return this->fat_ramificacao;
+}
+
+void Node::setCusto(int custo){
+    this->custo = custo;
+}
+
+int Node::getCusto(){
+    return custo;
 }
 #endif
