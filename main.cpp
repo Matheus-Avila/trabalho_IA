@@ -17,7 +17,7 @@ int main()
     bl->busca_largura(*lab);
 
     BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
-    bp->busca_profundidade_limitada(*lab, 39);
+    bp->busca_profundidade_limitada(*lab, 4);
 
     return 0;
 }

@@ -10,7 +10,7 @@ class BuscaProfundidadeLimitada : Algoritmo
 {
 
 private:
-    Node *recursiveDLS(Labirinto lab, Node *atual, int limite) throw(int);
+    Node *recursiveDLS(Labirinto lab, Node *atual, int limite);
 
 public:
     BuscaProfundidadeLimitada(/* args */);
@@ -42,7 +42,7 @@ void BuscaProfundidadeLimitada::busca_profundidade_limitada(Labirinto lab, int l
 }
 
 //funcao que retorna um no solucao ou dispara um valor 2 caso atindido o limite
-Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int limite) throw(int)
+Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int limite)
 {
     if (checaSolucao(lab, atual))
     {
