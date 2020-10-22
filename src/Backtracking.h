@@ -10,96 +10,66 @@ class Backtracking : public Algoritmo
 {
 private:
     Node *recursive_Backtracking(Labirinto lab, vector<Node *> explorados, Node *estadoatual);
-    bool checaExplorado(vector<Node *> explorados, int x, int y);
 
 public:
     void backtracking(Labirinto lab);
 };
 
-bool Backtracking::checaExplorado(vector<Node *> explorados, int x, int y)
-{
-
-    for (int i = 0; i < explorados.size(); i++)
-    {
-        if (explorados[i]->get_coordx() == x && explorados[i]->get_coordy() == y)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 void Backtracking::backtracking(Labirinto lab)
 {
-
     coordenadas entrada = lab.get_entrada();
-
-    Node* raiz = new Node('x', entrada.x, entrada.y, NULL);
-
+    Node *raiz = new Node('x', entrada.x, entrada.y, NULL);
     vector<Node *> explorados;
 
     Node *solution = recursive_Backtracking(lab, explorados, raiz);
-
-    if(solution != NULL){
-        Node* aux = solution;
-        string moves;
-
-        while(aux != NULL){
-            moves.insert(0,1, aux->get_acao());
-            aux = aux->getPai();
-        }
-        cout << moves << endl;
-    }
-    else{
-        cout << "Nao tem solucao" << endl;
-    }
+    printaSolucao(solution);
 }
 
-Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node*> explorados, Node* estadoAtual)
+Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explorados, Node *estadoAtual)
 {
     explorados.push_back(estadoAtual);
-    //cout << "estado atual: " << estadoAtual->get_coordx() << " " << estadoAtual->get_coordy() << endl;
 
-    if (estadoAtual->get_coordx() == lab.get_saida().x && estadoAtual->get_coordy() == lab.get_saida().y)
+    //verifica se estado atual e solucao do labirinto
+    if (checaSolucao(lab, estadoAtual))
     {
         return estadoAtual;
     }
     else
     {
-        //checa se é possivel mover para cima, baixo, direita ou esquerda, nesta ordem, e
-        //se a posicao ainda não foi explorada
-
         int x = estadoAtual->get_coordx();
         int y = estadoAtual->get_coordy();
 
-        if (lab.podeMoverCima(x, y) && checaExplorado(explorados, x - 1, y))
+        //checa se é possivel mover para cima, baixo, direita ou esquerda, nesta ordem, e
+        //se a posicao ainda não foi explorada
+
+        if (lab.podeMoverCima(x, y) && checaVetor(explorados, x - 1, y))
         {
-            Node* noFilho = new Node('C', x - 1, y, estadoAtual);
-            Node* solution = recursive_Backtracking(lab, explorados, noFilho);
+            Node *noFilho = new Node('C', x - 1, y, estadoAtual);
+            Node *solution = recursive_Backtracking(lab, explorados, noFilho);
 
             if (solution != NULL)
                 return solution;
         }
-        if (lab.podeMoverBaixo(x, y) && checaExplorado(explorados, x + 1, y))
+        if (lab.podeMoverBaixo(x, y) && checaVetor(explorados, x + 1, y))
         {
-            Node* noFilho = new Node('B', x + 1, y, estadoAtual);
-            Node* solution = recursive_Backtracking(lab, explorados, noFilho);
+            Node *noFilho = new Node('B', x + 1, y, estadoAtual);
+            Node *solution = recursive_Backtracking(lab, explorados, noFilho);
 
             if (solution != NULL)
                 return solution;
         }
-        if (lab.podeMoverDireita(x, y) && checaExplorado(explorados, x, y + 1))
+        if (lab.podeMoverDireita(x, y) && checaVetor(explorados, x, y + 1))
         {
-            Node* noFilho = new Node('D', x, y + 1, estadoAtual);
-            Node* solution = recursive_Backtracking(lab, explorados, noFilho);
+            Node *noFilho = new Node('D', x, y + 1, estadoAtual);
+            Node *solution = recursive_Backtracking(lab, explorados, noFilho);
 
             if (solution != NULL)
                 return solution;
         }
-        if (lab.podeMoverEsquerda(x, y) && checaExplorado(explorados, x, y - 1))
+        if (lab.podeMoverEsquerda(x, y) && checaVetor(explorados, x, y - 1))
         {
-            Node* noFilho = new Node('E', x, y - 1, estadoAtual);
-            Node* solution = recursive_Backtracking(lab, explorados, noFilho);
+            Node *noFilho = new Node('E', x, y - 1, estadoAtual);
+            Node *solution = recursive_Backtracking(lab, explorados, noFilho);
 
             if (solution != NULL)
                 return solution;
@@ -108,5 +78,4 @@ Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node*> explorad
         return NULL;
     }
 }
-
 #endif

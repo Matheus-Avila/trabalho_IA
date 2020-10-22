@@ -1,5 +1,6 @@
 #ifndef BuscaLargura_h
 #define BuscaLargura_h
+
 #include "Algoritmo.h"
 #include <vector>
 #include "Labirinto.h"
@@ -9,8 +10,7 @@ class BuscaLargura : Algoritmo
 {
 private:
     Node *busca_iterativa(Labirinto lab);
-    bool checaExplorado(vector<Node *> explorados, int x, int y);
-    bool checaFronteira(vector<Node *> fronteira, int x, int y);
+
 public:
     BuscaLargura(/* args */);
     ~BuscaLargura();
@@ -25,70 +25,32 @@ BuscaLargura::~BuscaLargura()
 {
 }
 
-bool BuscaLargura::checaFronteira(vector<Node *> fronteira, int x, int y)
-{
-
-    for (int i = 0; i < fronteira.size(); i++)
-    {
-        if (fronteira[i]->get_coordx() == x && fronteira[i]->get_coordy() == y)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool BuscaLargura::checaExplorado(vector<Node *> explorados, int x, int y)
-{
-
-    for (int i = 0; i < explorados.size(); i++)
-    {
-        if (explorados[i]->get_coordx() == x && explorados[i]->get_coordy() == y)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 void BuscaLargura::busca_largura(Labirinto lab)
 {
-
     Node *solution = busca_iterativa(lab);
-    
-    if(solution != NULL){
-        Node* aux = solution;
-        string moves;
-
-        while(aux != NULL){
-            moves.insert(0,1, aux->get_acao());
-            aux = aux->getPai();
-        }
-        cout << moves << endl;
-    }
-    else{
-        cout << "Nao tem solucao" << endl;
-    }
-
+    printaSolucao(solution);
 }
 
 Node *BuscaLargura::busca_iterativa(Labirinto lab)
 {
-
     Node *raiz = new Node('x', lab.get_entrada().x, lab.get_entrada().y, NULL);
 
     vector<Node *> explorados;
     vector<Node *> fronteira;
 
     fronteira.push_back(raiz);
-    if (raiz->get_coordx() == lab.get_saida().x && raiz->get_coordy() == lab.get_saida().y)
+
+    //checa se raiz e solucao do problema
+    if (checaSolucao(lab, raiz))
     {
         return raiz;
     }
     else
     {
+        //Roda ate fronteira ficar vazia ou encontrar solucao
         while (true)
         {
+            //nao a mais elementos para serem gerados
             if (fronteira.empty())
                 return NULL;
             else
@@ -100,13 +62,17 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                 int x = atual->get_coordx();
                 int y = atual->get_coordy();
 
+                //checa se é possivel mover para cima, baixo, direita ou esquerda, nesta ordem, e
+                //se a posicao ainda não foi explorada
                 if (lab.podeMoverCima(x, y))
                 {
                     Node *noFilho = new Node('C', x - 1, y, atual);
-                    if (checaExplorado(explorados, x - 1, y) && checaFronteira(fronteira, x - 1, y))
+
+                    //checa se a posicao nao esta nem no vetor de explorados e na fronteira
+                    if (checaVetor(explorados, x - 1, y) && checaVetor(fronteira, x - 1, y))
                     {
-                        if (noFilho->get_coordx() == lab.get_saida().x &&
-                        noFilho->get_coordy() == lab.get_saida().y){
+                        if (checaSolucao(lab, noFilho))
+                        {
                             return noFilho;
                         }
                         fronteira.push_back(noFilho);
@@ -115,10 +81,12 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                 if (lab.podeMoverBaixo(x, y))
                 {
                     Node *noFilho = new Node('B', x + 1, y, atual);
-                    if (checaExplorado(explorados, x + 1, y) && checaFronteira(fronteira, x + 1, y))
+
+                    //checa se a posicao nao esta nem no vetor de explorados e na fronteira
+                    if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
                     {
-                        if (noFilho->get_coordx() == lab.get_saida().x &&
-                        noFilho->get_coordy() == lab.get_saida().y){
+                        if (checaSolucao(lab, noFilho))
+                        {
                             return noFilho;
                         }
                         fronteira.push_back(noFilho);
@@ -127,10 +95,12 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                 if (lab.podeMoverDireita(x, y))
                 {
                     Node *noFilho = new Node('D', x, y + 1, atual);
-                    if (checaExplorado(explorados, x, y + 1) && checaFronteira(fronteira, x, y + 1))
+
+                    //checa se a posicao nao esta nem no vetor de explorados e na fronteira
+                    if (checaVetor(explorados, x, y + 1) && checaVetor(fronteira, x, y + 1))
                     {
-                        if (noFilho->get_coordx() == lab.get_saida().x &&
-                        noFilho->get_coordy() == lab.get_saida().y){
+                        if (checaSolucao(lab, noFilho))
+                        {
                             return noFilho;
                         }
                         fronteira.push_back(noFilho);
@@ -139,10 +109,12 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                 if (lab.podeMoverEsquerda(x, y))
                 {
                     Node *noFilho = new Node('E', x, y - 1, atual);
-                    if (checaExplorado(explorados, x, y - 1) && checaFronteira(fronteira, x, y - 1))
+
+                    //checa se a posicao nao esta nem no vetor de explorados e na fronteira
+                    if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
                     {
-                        if (noFilho->get_coordx() == lab.get_saida().x &&
-                        noFilho->get_coordy() == lab.get_saida().y){
+                        if (checaSolucao(lab, noFilho))
+                        {
                             return noFilho;
                         }
                         fronteira.push_back(noFilho);
@@ -150,7 +122,6 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                 }
             }
         }
-        
     }
 }
 #endif

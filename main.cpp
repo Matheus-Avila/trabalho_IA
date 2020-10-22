@@ -1,17 +1,14 @@
 #include "src/Labirinto.h"
-#include "src/Node.h"
-#include "src/Algoritmo.h"
 #include "src/Backtracking.h"
 #include "src/BuscaLargura.h"
 #include "src/BuscaProfundidadeLimitada.h"
-#include <exception>
 
 using namespace std;
 
 int main()
 {
     Labirinto *lab = new Labirinto();
-    lab->set_labirinto("Labirintos/lab2.txt");
+    lab->set_labirinto("Labirintos/lab1.txt");
 
     Backtracking* bt = new Backtracking();
     bt->backtracking(*lab);
@@ -20,7 +17,7 @@ int main()
     bl->busca_largura(*lab);
 
     BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
-    bp->busca_profundidade_limitada(*lab, 8);
+    bp->busca_profundidade_limitada(*lab, 39);
 
     return 0;
 }
