@@ -1,5 +1,5 @@
-#ifndef BuscaOrdenada_h
-#define BuscaOrdenada_h
+#ifndef BuscaGulosa_h
+#define BuscaGulosa_h
 #include "Algoritmo.h"
 #include <vector>
 #include "Labirinto.h"
@@ -7,36 +7,36 @@
 #include <exception>
 #include <queue>
 
-class BuscaOrdenada : Algoritmo
+class BuscaGulosa : Algoritmo
 {
 
 private:
     Node *busca(Labirinto lab);
 
 public:
-    BuscaOrdenada(/* args */);
-    ~BuscaOrdenada();
-    void buscaOrdenada(Labirinto lab);
+    BuscaGulosa(/* args */);
+    ~BuscaGulosa();
+    void buscaGulosa(Labirinto lab);
 };
 
-BuscaOrdenada::BuscaOrdenada(/* args */)
+BuscaGulosa::BuscaGulosa(/* args */)
 {
 }
 
-BuscaOrdenada::~BuscaOrdenada()
+BuscaGulosa::~BuscaGulosa()
 {
 }
 
-void BuscaOrdenada::buscaOrdenada(Labirinto lab)
+void BuscaGulosa::buscaGulosa(Labirinto lab)
 {
     Node *solution = busca(lab);
     printaSolucao(solution);
 }
 
-Node *BuscaOrdenada::busca(Labirinto lab)
+Node *BuscaGulosa::busca(Labirinto lab)
 {
     Node *raiz = new Node('x', lab.get_entrada().x, lab.get_entrada().y, NULL);
-    raiz->setCusto(0);
+    raiz->setCusto(heuristica(raiz->get_coordx(), raiz->get_coordy(), lab));
 
     vector<Node *> fronteira;
     vector<Node *> explorados;
@@ -47,8 +47,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
     while (true)
     {
         //nao a mais elementos para serem gerados
-        if (fronteira.empty())
-        {
+        if (fronteira.empty()){
             return NULL;
         }
         else
@@ -56,11 +55,10 @@ Node *BuscaOrdenada::busca(Labirinto lab)
             Node *atual = fronteira[0];
             fronteira.erase(fronteira.begin());
 
-            if (checaSolucao(lab, atual))
-            {
+            if (checaSolucao(lab, atual)){
                 return atual;
             }
-
+              
             explorados.push_back(atual);
 
             int x = atual->get_coordx();
@@ -71,7 +69,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
             if (lab.podeMoverCima(x, y))
             {
                 Node *noFilho = new Node('C', x - 1, y, atual);
-                noFilho->setCusto(atual->getCusto() + 1);
+                noFilho->setCusto(heuristica(noFilho->get_coordx(), noFilho->get_coordy(), lab));
 
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x - 1, y) && checaVetor(fronteira, x - 1, y))
@@ -89,7 +87,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
             if (lab.podeMoverBaixo(x, y))
             {
                 Node *noFilho = new Node('B', x + 1, y, atual);
-                noFilho->setCusto(atual->getCusto() + 1);
+                noFilho->setCusto(heuristica(noFilho->get_coordx(), noFilho->get_coordy(), lab));
 
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
@@ -107,7 +105,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
             if (lab.podeMoverDireita(x, y))
             {
                 Node *noFilho = new Node('D', x, y + 1, atual);
-                noFilho->setCusto(atual->getCusto() + 1);
+                noFilho->setCusto(heuristica(noFilho->get_coordx(), noFilho->get_coordy(), lab));
 
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x, y + 1) && checaVetor(fronteira, x, y + 1))
@@ -125,7 +123,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
             if (lab.podeMoverEsquerda(x, y))
             {
                 Node *noFilho = new Node('E', x, y - 1, atual);
-                noFilho->setCusto(atual->getCusto() + 1);
+                noFilho->setCusto(heuristica(noFilho->get_coordx(), noFilho->get_coordy(), lab));
 
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
