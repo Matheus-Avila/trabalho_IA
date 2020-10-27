@@ -31,6 +31,6 @@ int main()
 
     BuscaAEstrela* ba = new BuscaAEstrela();
     ba->buscaAEstrela(*lab);
-    
+
     return 0;
 }
