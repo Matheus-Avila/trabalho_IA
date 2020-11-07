@@ -4,7 +4,6 @@
 #include <vector>
 #include "Labirinto.h"
 #include "Node.h"
-#include <exception>
 
 class BuscaProfundidadeLimitada : Algoritmo
 {

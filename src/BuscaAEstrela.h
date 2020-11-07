@@ -4,8 +4,6 @@
 #include <vector>
 #include "Labirinto.h"
 #include "Node.h"
-#include <exception>
-#include <queue>
 
 class BuscaAEstrela : Algoritmo
 {

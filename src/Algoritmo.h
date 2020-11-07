@@ -26,7 +26,7 @@ Algoritmo::~Algoritmo()
 //funcao heuristica que retorna o custo do no
 int Algoritmo::heuristica(int x, int y, Labirinto lab){
     
-    return (x - lab.get_saida().x + y - lab.get_saida().y);
+    return (abs(x - lab.get_saida().x) + abs(y - lab.get_saida().y));
 }
 
 //substitui um no x com menor custo no vetor vet
