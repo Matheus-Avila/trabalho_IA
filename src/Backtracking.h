@@ -5,27 +5,39 @@
 #include "Node.h"
 #include "Labirinto.h"
 #include <vector>
+#include <string>
 
-class Backtracking : public Algoritmo
+class Backtracking : Algoritmo
 {
 private:
-    Node *recursive_Backtracking(Labirinto lab, vector<Node *> explorados, Node *estadoatual);
+    Node *recursive_Backtracking(Labirinto lab, vector<Node *> &explorados, Node *estadoatual);
 
 public:
-    void backtracking(Labirinto lab);
+    string backtracking(Labirinto lab);
 };
 
-void Backtracking::backtracking(Labirinto lab)
+string Backtracking::backtracking(Labirinto lab)
 {
     coordenadas entrada = lab.get_entrada();
     Node *raiz = new Node('x', entrada.x, entrada.y, NULL);
     vector<Node *> explorados;
 
+    inicio = clock();
     Node *solution = recursive_Backtracking(lab, explorados, raiz);
+    fim = clock();
+
+    this->estatisticas += "Backtracking: \n";
     printaSolucao(solution);
+    this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+    this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
+
+    float time = ((float)(fim - inicio)/CLOCKS_PER_SEC);
+    this->estatisticas += "Tempo de execucao: " + to_string(time*1000) + " milisegundos" + '\n';
+
+    return this->estatisticas;
 }
 
-Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explorados, Node *estadoAtual)
+Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> &explorados, Node *estadoAtual)
 {
     explorados.push_back(estadoAtual);
 
@@ -46,6 +58,7 @@ Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explora
         {
             Node *noFilho = new Node('C', x - 1, y, estadoAtual);
             Node *solution = recursive_Backtracking(lab, explorados, noFilho);
+            this->fat_ramificacao++;
 
             if (solution != NULL)
                 return solution;
@@ -54,6 +67,7 @@ Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explora
         {
             Node *noFilho = new Node('B', x + 1, y, estadoAtual);
             Node *solution = recursive_Backtracking(lab, explorados, noFilho);
+            this->fat_ramificacao++;
 
             if (solution != NULL)
                 return solution;
@@ -62,6 +76,7 @@ Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explora
         {
             Node *noFilho = new Node('D', x, y + 1, estadoAtual);
             Node *solution = recursive_Backtracking(lab, explorados, noFilho);
+            this->fat_ramificacao++;
 
             if (solution != NULL)
                 return solution;
@@ -70,6 +85,7 @@ Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> explora
         {
             Node *noFilho = new Node('E', x, y - 1, estadoAtual);
             Node *solution = recursive_Backtracking(lab, explorados, noFilho);
+            this->fat_ramificacao++;
 
             if (solution != NULL)
                 return solution;

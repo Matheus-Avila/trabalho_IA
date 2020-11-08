@@ -6,18 +6,22 @@
 #include "src/BuscaGulosa.h"
 #include "src/BuscaAEstrela.h"
 #include "src/BuscaIDA.h"
-
+#include "src/Algoritmo.h"
 using namespace std;
 
 int main()
 {
-    
+    string file = "Labirintos/lab1.txt";
+    fstream log;
+    log.open ("log.txt", fstream::app);
+
     Labirinto *lab = new Labirinto();
-    lab->set_labirinto("Labirintos/lab2.txt");
+    lab->set_labirinto(file);
     
     Backtracking* bt = new Backtracking();
-    bt->backtracking(*lab);
+    log << bt->backtracking(*lab);
 
+/*
     BuscaLargura* bl = new BuscaLargura();
     bl->busca_largura(*lab);
 
@@ -35,6 +39,6 @@ int main()
 
     BuscaIDA* bIDA = new BuscaIDA();
     bIDA->buscaIDA(*lab);
-
+*/
     return 0;
 }

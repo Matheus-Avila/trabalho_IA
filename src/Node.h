@@ -10,15 +10,12 @@ private:
     Node* pai;
     char acao;
     int custo;
-    int fat_ramificacao;
 
 public:
     Node(char acao, int x, int y, Node* pai);
     ~Node();
     int get_coordx();
     int get_coordy();
-    void set_ramificacao(int ramificacao);
-    int get_ramificacao();
     char get_acao();
     void setCusto(int custo);
     int getCusto();
@@ -49,14 +46,6 @@ int Node::get_coordx(){
 
 int Node::get_coordy(){
     return this->coord.y;
-}
-
-void Node::set_ramificacao(int ramificacao){
-    this->fat_ramificacao = ramificacao;
-}
-
-int Node::get_ramificacao(){
-    return this->fat_ramificacao;
 }
 
 void Node::setCusto(int custo){

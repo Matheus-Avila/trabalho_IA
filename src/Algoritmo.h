@@ -1,10 +1,14 @@
 #ifndef Algoritmo_h
 #define Algoritmo_h
 #include "Node.h"
+#include <time.h>
 
 class Algoritmo{
-    private:
     public:
+        string estatisticas;
+        clock_t inicio;
+        clock_t fim;
+        int fat_ramificacao;
         Algoritmo(/* args */);
         bool checaVetor(vector<Node *> explorados, int x, int y);
         bool checaSolucao(Labirinto lab, Node* x);
@@ -12,6 +16,7 @@ class Algoritmo{
         void insertPriority(vector<Node *> &vet, Node *x);
         void replaceFrontier(vector<Node *> &vet, Node *x);
         int heuristica(int x, int y, Labirinto lab);
+        string getEstatisticas();
         ~Algoritmo();
 };
 
@@ -21,6 +26,11 @@ Algoritmo::Algoritmo(/* args */)
 
 Algoritmo::~Algoritmo()
 {
+    fat_ramificacao = 0;
+}
+
+string Algoritmo::getEstatisticas(){
+    return this->estatisticas;
 }
 
 //funcao heuristica que retorna o custo do no
@@ -72,7 +82,17 @@ void Algoritmo::printaSolucao(Node* x){
             moves.insert(0, 1, aux->get_acao());
             aux = aux->getPai();
         }
-        cout << moves << endl;
+        this->estatisticas += "Caminho:\n";
+        this->estatisticas += moves;
+        this->estatisticas += '\n';
+
+        this->estatisticas += "Custo da solucao: ";
+        this->estatisticas += to_string((moves.size() - 1));
+        this->estatisticas += '\n';
+
+        this->estatisticas += "Profundidade: ";
+        this->estatisticas += to_string((moves.size() - 1));
+        this->estatisticas += '\n';
     }else{
         cout << "Nao tem solucao" << endl;
     }

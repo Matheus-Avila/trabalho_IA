@@ -1,0 +1,8 @@
+Backtracking: 
+Caminho:
+xDBDDBBBEBBBBBEBBDDCDCCCDDBBBBBDDCCDCCCCDCCCCDDDDBBBBEEBBEBBDBBDDDDDDDDB
+Custo da solucao: 71
+Profundidade: 71
+Total de nos expandidos: 112
+Fator de ramificacao medio: 0.991071
+Tempo de execucao: 0.142000 milisegundos

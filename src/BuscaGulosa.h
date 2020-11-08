@@ -47,7 +47,8 @@ Node *BuscaGulosa::busca(Labirinto lab)
     while (true)
     {
         //nao a mais elementos para serem gerados
-        if (fronteira.empty()){
+        if (fronteira.empty())
+        {
             return NULL;
         }
         else
@@ -55,10 +56,11 @@ Node *BuscaGulosa::busca(Labirinto lab)
             Node *atual = fronteira[0];
             fronteira.erase(fronteira.begin());
 
-            if (checaSolucao(lab, atual)){
+            if (checaSolucao(lab, atual))
+            {
                 return atual;
             }
-              
+
             explorados.push_back(atual);
 
             int x = atual->get_coordx();
@@ -76,13 +78,6 @@ Node *BuscaGulosa::busca(Labirinto lab)
                 {
                     insertPriority(fronteira, noFilho);
                 }
-                else
-                {
-                    if (!checaVetor(fronteira, x - 1, y))
-                    {
-                        replaceFrontier(fronteira, noFilho);
-                    }
-                }
             }
             if (lab.podeMoverBaixo(x, y))
             {
@@ -93,13 +88,6 @@ Node *BuscaGulosa::busca(Labirinto lab)
                 if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
                 {
                     insertPriority(fronteira, noFilho);
-                }
-                else
-                {
-                    if (!checaVetor(fronteira, x + 1, y))
-                    {
-                        replaceFrontier(fronteira, noFilho);
-                    }
                 }
             }
             if (lab.podeMoverDireita(x, y))
@@ -112,13 +100,6 @@ Node *BuscaGulosa::busca(Labirinto lab)
                 {
                     insertPriority(fronteira, noFilho);
                 }
-                else
-                {
-                    if (!checaVetor(fronteira, x, y + 1))
-                    {
-                        replaceFrontier(fronteira, noFilho);
-                    }
-                }
             }
             if (lab.podeMoverEsquerda(x, y))
             {
@@ -129,13 +110,6 @@ Node *BuscaGulosa::busca(Labirinto lab)
                 if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
                 {
                     insertPriority(fronteira, noFilho);
-                }
-                else
-                {
-                    if (!checaVetor(fronteira, x, y - 1))
-                    {
-                        replaceFrontier(fronteira, noFilho);
-                    }
                 }
             }
         }
