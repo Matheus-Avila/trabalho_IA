@@ -4,5 +4,81 @@ xDBDDBBBEBBBBBEBBDDCDCCCDDBBBBBDDCCDCCCCDCCCCDDDDBBBBEEBBEBBDBBDDDDDDDDB
 Custo da solucao: 71
 Profundidade: 71
 Total de nos expandidos: 112
+Total de nos visitados: 111
 Fator de ramificacao medio: 0.991071
-Tempo de execucao: 0.142000 milisegundos
+Tempo de execucao: 186 microsegundos
+Busca A*: 
+Caminho:
+xDBDDBBBEBBBDDDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 39
+Profundidade: 39
+Total de nos expandidos: 76
+Total de nos visitados: 80
+Fator de ramificacao medio: 1.052632
+Tempo de execucao: 166  microsegundos
+Busca Gulosa: 
+Caminho:
+xDBDDBBBEBBBDDDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 39
+Profundidade: 39
+Total de nos expandidos: 52
+Total de nos visitados: 65
+Fator de ramificacao medio: 1.250000
+Tempo de execucao: 122 microsegundos
+Busca IDA: 
+Patamar: 33
+Total de nos expandidos: 18
+Total de nos visitados: 17
+Fator de ramificacao medio: 0.944444
+Total de nos descartados: 20
+Tempo de execucao: 52 milisegundos
+Patamar: 35
+Total de nos expandidos: 40
+Total de nos visitados: 39
+Fator de ramificacao medio: 0.975000
+Total de nos descartados: 28
+Tempo de execucao: 54 milisegundos
+Patamar: 37
+Total de nos expandidos: 54
+Total de nos visitados: 53
+Fator de ramificacao medio: 0.981481
+Total de nos descartados: 12
+Tempo de execucao: 103 milisegundos
+Patamar: 39
+Total de nos expandidos: 76
+Total de nos visitados: 76
+Fator de ramificacao medio: 1.000000
+Tempo de execucao: 178 microsegundos
+Tempo de execucao Total: 406 microsegundos
+Caminho:
+xDBDDBBBEBBBDDDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 39
+Profundidade: 39
+Busca Largura: 
+Caminho:
+xDBDDBBBEBBBDDDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 39
+Profundidade: 39
+Total de nos expandidos: 113
+Total de nos visitados: 117
+Fator de ramificacao medio: 1.035398
+Tempo de execucao: 202 microsegundos
+Busca Ordenada: 
+Caminho:
+xDBDDBBBEBBBDDDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 39
+Profundidade: 39
+Total de nos expandidos: 117
+Total de nos visitados: 119
+Fator de ramificacao medio: 1.017094
+Tempo de execucao: 241 microsegundos
+Busca Profundidade limitada: 
+ limite 50
+Caminho:
+xDBDDBBBEBBBBBEBBDDCDCCCDDBBBBBDDCCDDBBDDDDDDDDDDB
+Custo da solucao: 49
+Profundidade: 49
+Total de nos expandidos: 236
+Total de nos visitados: 262
+Fator de ramificacao medio: 1.110170
+Tempo de execucao: 401 microsegundos

@@ -7,11 +7,11 @@
 #include <exception>
 #include <queue>
 
-class BuscaOrdenada : Algoritmo
+class BuscaOrdenada : public Algoritmo
 {
 
 private:
-    Node *busca(Labirinto lab);
+    Node *busca(Labirinto lab, vector<Node *> &explorados);
 
 public:
     BuscaOrdenada(/* args */);
@@ -29,17 +29,24 @@ BuscaOrdenada::~BuscaOrdenada()
 
 void BuscaOrdenada::buscaOrdenada(Labirinto lab)
 {
-    Node *solution = busca(lab);
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    vector<Node *> explorados;
+    Node *solution = busca(lab, explorados);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    this->estatisticas += "Busca Ordenada: \n";
     printaSolucao(solution);
+    this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+    this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
+    this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
+    this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
 }
 
-Node *BuscaOrdenada::busca(Labirinto lab)
+Node *BuscaOrdenada::busca(Labirinto lab, vector<Node *> &explorados)
 {
     Node *raiz = new Node('x', lab.get_entrada().x, lab.get_entrada().y, NULL);
     raiz->setCusto(0);
 
     vector<Node *> fronteira;
-    vector<Node *> explorados;
 
     fronteira.push_back(raiz);
 
@@ -76,6 +83,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x - 1, y) && checaVetor(fronteira, x - 1, y))
                 {
+                    this->fat_ramificacao++;
                     insertPriority(fronteira, noFilho);
                 }
                 else
@@ -94,6 +102,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
                 {
+                    this->fat_ramificacao++;
                     insertPriority(fronteira, noFilho);
                 }
                 else
@@ -112,6 +121,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x, y + 1) && checaVetor(fronteira, x, y + 1))
                 {
+                    this->fat_ramificacao++;
                     insertPriority(fronteira, noFilho);
                 }
                 else
@@ -130,6 +140,7 @@ Node *BuscaOrdenada::busca(Labirinto lab)
                 //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                 if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
                 {
+                    this->fat_ramificacao++;
                     insertPriority(fronteira, noFilho);
                 }
                 else

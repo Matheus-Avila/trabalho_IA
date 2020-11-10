@@ -5,7 +5,7 @@
 #include "Labirinto.h"
 #include "Node.h"
 
-class BuscaIDA : Algoritmo
+class BuscaIDA : public Algoritmo
 {
 private:
     Node *busca(Labirinto lab);
@@ -27,7 +27,12 @@ BuscaIDA::~BuscaIDA()
 
 void BuscaIDA::buscaIDA(Labirinto lab)
 {
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    this->estatisticas += "Busca IDA: \n";
     Node *solution = busca(lab);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    this->estatisticas += "Tempo de execucao Total: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
+
     printaSolucao(solution);
 }
 
@@ -77,6 +82,7 @@ Node *BuscaIDA::iterativeA(Labirinto lab, vector<Node *> &explorados, vector<Nod
                 {
                     if (checaVetor(explorados, x - 1, y) && checaVetor(fronteira, x - 1, y))
                     {
+                        this->fat_ramificacao++;
                         insertPriority(fronteira, noFilho);
                     }
                     else
@@ -102,6 +108,7 @@ Node *BuscaIDA::iterativeA(Labirinto lab, vector<Node *> &explorados, vector<Nod
                 {
                     if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
                     {
+                        this->fat_ramificacao++;
                         insertPriority(fronteira, noFilho);
                     }
                     else
@@ -127,6 +134,7 @@ Node *BuscaIDA::iterativeA(Labirinto lab, vector<Node *> &explorados, vector<Nod
                 {
                     if (checaVetor(explorados, x, y + 1) && checaVetor(fronteira, x, y + 1))
                     {
+                        this->fat_ramificacao++;
                         insertPriority(fronteira, noFilho);
                     }
                     else
@@ -152,6 +160,7 @@ Node *BuscaIDA::iterativeA(Labirinto lab, vector<Node *> &explorados, vector<Nod
                 {
                     if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
                     {
+                        this->fat_ramificacao++;
                         insertPriority(fronteira, noFilho);
                     }
                     else
@@ -180,26 +189,43 @@ Node *BuscaIDA::busca(Labirinto lab)
 
     while (true)
     {
+        this->estatisticas += "Patamar: " + to_string(patamar) + '\n';
+
         vector<Node *> fronteira;
         vector<Node *> explorados;
         vector<Node *> descartados;
 
         fronteira.push_back(raiz);
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
         try
         {
             Node *solution = iterativeA(lab, explorados, fronteira, descartados, patamar);
+            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+            this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+            this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
+            this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
+
+            this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
+
             return solution;
         }
         catch (int e)
         {
-            cout << "Patamar insuficiente: " << patamar << endl;
+            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+            this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+            this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
+            this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
+            this->estatisticas += "Total de nos descartados: " + to_string(descartados.size()) + '\n';
+            this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " milisegundos" + '\n';
+
         }
 
         patamar = descartados[0]->getCusto();
         fronteira.clear();
         explorados.clear();
         descartados.clear();
+        this->fat_ramificacao = 0;
     }
 }
 #endif

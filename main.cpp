@@ -19,14 +19,37 @@ int main()
     lab->set_labirinto(file);
     
     Backtracking* bt = new Backtracking();
-    log << bt->backtracking(*lab);
+    bt->backtracking(*lab);
+    log << bt->getEstatisticas();
 
+    BuscaAEstrela* ba = new BuscaAEstrela();
+    ba->buscaAEstrela(*lab);
+    log << ba->getEstatisticas();
+
+    BuscaGulosa* bg = new BuscaGulosa();
+    bg->buscaGulosa(*lab);
+    log << bg->getEstatisticas();
+
+    BuscaIDA* bIDA = new BuscaIDA();
+    bIDA->buscaIDA(*lab);
+    log << bIDA->getEstatisticas();
+
+    BuscaLargura* bl = new BuscaLargura();
+    bl->busca_largura(*lab);
+    log << bl->getEstatisticas();
+
+    BuscaOrdenada* bo = new BuscaOrdenada();
+    bo->buscaOrdenada(*lab);
+    log << bo->getEstatisticas();
+
+    BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
+    bp->busca_profundidade_limitada(*lab, 50);
+    log << bp->getEstatisticas();
 /*
     BuscaLargura* bl = new BuscaLargura();
     bl->busca_largura(*lab);
 
-    BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
-    bp->busca_profundidade_limitada(*lab, 50);
+    
 
     BuscaOrdenada* bo = new BuscaOrdenada();
     bo->buscaOrdenada(*lab);
@@ -37,8 +60,6 @@ int main()
     BuscaAEstrela* ba = new BuscaAEstrela();
     ba->buscaAEstrela(*lab);
 
-    BuscaIDA* bIDA = new BuscaIDA();
-    bIDA->buscaIDA(*lab);
 */
     return 0;
 }

@@ -7,34 +7,31 @@
 #include <vector>
 #include <string>
 
-class Backtracking : Algoritmo
+class Backtracking : public Algoritmo
 {
 private:
     Node *recursive_Backtracking(Labirinto lab, vector<Node *> &explorados, Node *estadoatual);
 
 public:
-    string backtracking(Labirinto lab);
+    void backtracking(Labirinto lab);
 };
 
-string Backtracking::backtracking(Labirinto lab)
+void Backtracking::backtracking(Labirinto lab)
 {
     coordenadas entrada = lab.get_entrada();
     Node *raiz = new Node('x', entrada.x, entrada.y, NULL);
     vector<Node *> explorados;
 
-    inicio = clock();
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     Node *solution = recursive_Backtracking(lab, explorados, raiz);
-    fim = clock();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     this->estatisticas += "Backtracking: \n";
     printaSolucao(solution);
     this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+    this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
     this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
-
-    float time = ((float)(fim - inicio)/CLOCKS_PER_SEC);
-    this->estatisticas += "Tempo de execucao: " + to_string(time*1000) + " milisegundos" + '\n';
-
-    return this->estatisticas;
+    this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
 }
 
 Node *Backtracking::recursive_Backtracking(Labirinto lab, vector<Node *> &explorados, Node *estadoAtual)

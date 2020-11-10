@@ -1,7 +1,8 @@
 #ifndef Algoritmo_h
 #define Algoritmo_h
 #include "Node.h"
-#include <time.h>
+#include <chrono>
+
 
 class Algoritmo{
     public:
@@ -22,11 +23,11 @@ class Algoritmo{
 
 Algoritmo::Algoritmo(/* args */)
 {
+    fat_ramificacao = 0;
 }
 
 Algoritmo::~Algoritmo()
 {
-    fat_ramificacao = 0;
 }
 
 string Algoritmo::getEstatisticas(){

@@ -6,10 +6,10 @@
 #include "Labirinto.h"
 #include "Node.h"
 
-class BuscaLargura : Algoritmo
+class BuscaLargura : public Algoritmo
 {
 private:
-    Node *busca_iterativa(Labirinto lab);
+    Node *busca_iterativa(Labirinto lab, vector<Node *> &explorados);
 
 public:
     BuscaLargura(/* args */);
@@ -27,15 +27,22 @@ BuscaLargura::~BuscaLargura()
 
 void BuscaLargura::busca_largura(Labirinto lab)
 {
-    Node *solution = busca_iterativa(lab);
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    vector<Node *> explorados;
+    Node *solution = busca_iterativa(lab, explorados);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    this->estatisticas += "Busca Largura: \n";
     printaSolucao(solution);
+    this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
+    this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
+    this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
+    this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
 }
 
-Node *BuscaLargura::busca_iterativa(Labirinto lab)
+Node *BuscaLargura::busca_iterativa(Labirinto lab, vector<Node *> &explorados)
 {
     Node *raiz = new Node('x', lab.get_entrada().x, lab.get_entrada().y, NULL);
 
-    vector<Node *> explorados;
     vector<Node *> fronteira;
 
     fronteira.push_back(raiz);
@@ -71,6 +78,7 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                     //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                     if (checaVetor(explorados, x - 1, y) && checaVetor(fronteira, x - 1, y))
                     {
+                        this->fat_ramificacao++;
                         if (checaSolucao(lab, noFilho))
                         {
                             return noFilho;
@@ -85,6 +93,7 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                     //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                     if (checaVetor(explorados, x + 1, y) && checaVetor(fronteira, x + 1, y))
                     {
+                        this->fat_ramificacao++;
                         if (checaSolucao(lab, noFilho))
                         {
                             return noFilho;
@@ -99,6 +108,7 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                     //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                     if (checaVetor(explorados, x, y + 1) && checaVetor(fronteira, x, y + 1))
                     {
+                        this->fat_ramificacao++;
                         if (checaSolucao(lab, noFilho))
                         {
                             return noFilho;
@@ -113,6 +123,7 @@ Node *BuscaLargura::busca_iterativa(Labirinto lab)
                     //checa se a posicao nao esta nem no vetor de explorados e na fronteira
                     if (checaVetor(explorados, x, y - 1) && checaVetor(fronteira, x, y - 1))
                     {
+                        this->fat_ramificacao++;
                         if (checaSolucao(lab, noFilho))
                         {
                             return noFilho;
