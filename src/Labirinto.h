@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <random>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ public:
     coordenadas get_saida();
     coordenadas get_entrada();
     bool** get_grid();
+    void criaLab(int tamanho, string nomearq);
     bool podeMoverCima(int x, int y);
     bool podeMoverBaixo(int x, int y);
     bool podeMoverDireita(int x, int y);
@@ -45,6 +47,35 @@ Labirinto::Labirinto()
 
 Labirinto::~Labirinto()
 {
+}
+
+void Labirinto::criaLab(int tamanho, string nomearq){
+
+    fstream lab;
+    string path = "Labirintos/" + nomearq;
+    lab.open (path, fstream::app);
+
+    //lab << "0 0\n";
+    //lab << to_string(tamanho - 1) + " " + to_string(tamanho - 1);
+
+    srand (time(NULL));
+    int v2;
+    for (size_t i = 0; i < tamanho; i++)
+    {
+        string line;
+        for (size_t j = 0; j < tamanho; j++)
+        {
+            v2 = rand() % 100 + 1;
+            if(v2 < 80){
+                line.append("0");
+            }else{
+                line.append("1");
+            }
+        }
+        lab << '\n';
+        lab << line;
+    }
+    lab.close(); 
 }
 
 bool Labirinto::podeMoverCima(int x, int y){
