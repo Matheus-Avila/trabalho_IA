@@ -1,63 +1,79 @@
 Backtracking: 
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDCCDCCCCCCCDDBBBBBBBDDDDBDDBDCCDCCCCCCCDDBBBBBBBDDDDBDDBDCCDCCCCCCCDDBBBBBBBDDDDBDDBDBDBBBBBBBEBBBDBBBBBBBEBBBDBBBBBBBEBBBDDDBBBBBBBDDDDBD
-Custo da solucao: 158
-Profundidade: 158
-Total de nos expandidos: 1026
-Total de nos visitados: 1025
-Fator de ramificacao medio: 0.999025
-Tempo de execucao: 7330 microsegundos
+xDBDBBBDDCCCDDBBBBBDBBDBBBBBBBDDBBDDCCCCCCCCCCCCCCCCDDDDDDBBBBBBBBBBBBBBBBBBD
+Custo da solucao: 76
+Profundidade: 76
+Total de nos expandidos: 94
+Total de nos visitados: 93
+Fator de ramificacao medio: 0.989362
+Tempo de execucao: 140 microsegundos
 
 Busca Largura: 
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBD
-Custo da solucao: 98
-Profundidade: 98
-Total de nos expandidos: 985
-Total de nos visitados: 994
-Fator de ramificacao medio: 1.009137
-Tempo de execucao: 8710 microsegundos
+xDBDBDDCDDBBBBBDBBDBBBBBDDDDBDDBDDDDBBBBD
+Custo da solucao: 40
+Profundidade: 40
+Total de nos expandidos: 161
+Total de nos visitados: 167
+Fator de ramificacao medio: 1.037267
+Tempo de execucao: 545 microsegundos
 
+Busca Profundidade limitada: 
+Limite 45
+Caminho:
+xDBDBBBDDCCCDDBBBBBDBBDBBBBBDDDDBDDBDDDDBBBBD
+Custo da solucao: 44
+Profundidade: 44
+Total de nos expandidos: 2781
+Total de nos visitados: 4666
+Fator de ramificacao medio: 1.677814
+Tempo de execucao: 15728 microsegundos
 
 Busca Ordenada: 
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBD
-Custo da solucao: 98
-Profundidade: 98
-Total de nos expandidos: 994
-Total de nos visitados: 1003
-Fator de ramificacao medio: 1.009054
-Tempo de execucao: 8228 microsegundos
+xDBDBDDCDDBBBBBDBBDBBBBBDDDDBDDBDDDDBBBBD
+Custo da solucao: 40
+Profundidade: 40
+Total de nos expandidos: 167
+Total de nos visitados: 174
+Fator de ramificacao medio: 1.041916
+Tempo de execucao: 793 microsegundos
 
 Busca Gulosa: 
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDBDBBBBBBBEBBBDBBBBBBBEBBBDBBBBBBBEBBBDDDBBBBBBBDDDDBDDDCDCCCCCCCDDBBBBBBBDDDDBDDDCDCCCCCCCDDBBBBBBBDDDDBDDDCDCCCCCCCDDBBBBBBBDDDDBD
-Custo da solucao: 152
-Profundidade: 152
-Total de nos expandidos: 200
-Total de nos visitados: 236
-Fator de ramificacao medio: 1.180000
-Tempo de execucao: 629 microsegundos
+xDBDBBBDDCCCDDBBBBBDBBDBBBBBBBDDBBDDBBDDCCCCDDDDBBBBD
+Custo da solucao: 52
+Profundidade: 52
+Total de nos expandidos: 68
+Total de nos visitados: 82
+Fator de ramificacao medio: 1.205882
+Tempo de execucao: 164 microsegundos
 
 Busca A*: 
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBD
-Custo da solucao: 98
-Profundidade: 98
-Total de nos expandidos: 137
-Total de nos visitados: 171
-Fator de ramificacao medio: 1.248175
-Tempo de execucao: 363  microsegundos
+xDBDBDDCDDBBBBBDBBDBBBBBDDDDBDDBDDDDBBBBD
+Custo da solucao: 40
+Profundidade: 40
+Total de nos expandidos: 92
+Total de nos visitados: 101
+Fator de ramificacao medio: 1.097826
+Tempo de execucao: 284  microsegundos
 
 Busca IDA: 
-Patamar: 98
-Total de nos expandidos: 137
-Total de nos visitados: 137
+Patamar: 38
+Total de nos expandidos: 21
+Total de nos visitados: 20
+Fator de ramificacao medio: 0.952381
+Total de nos descartados: 26
+Tempo de execucao: 38 milisegundos
+Patamar: 40
+Total de nos expandidos: 92
+Total de nos visitados: 92
 Fator de ramificacao medio: 1.000000
-Tempo de execucao: 311 microsegundos
-Tempo de execucao Total: 317 microsegundos
+Tempo de execucao: 214 microsegundos
+Tempo de execucao Total: 264 microsegundos
 Caminho:
-xDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBD
-Custo da solucao: 98
-Profundidade: 98
+xDBDBDDCDDBBBBBDBBDBBBBBDDDDBDDBDDDDBBBBD
+Custo da solucao: 40
+Profundidade: 40
 

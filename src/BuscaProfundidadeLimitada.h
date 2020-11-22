@@ -57,7 +57,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
     }
     else
     { 
-        if (limite == 0)
+        if (limite <= 0)
         {
             //lanca excecao
             throw 2;
@@ -77,7 +77,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 Node *noFilho = new Node('C', x - 1, y, atual);
                 this->fat_ramificacao++;
                 try
-                { 
+                {   
                     Node *resultado = recursiveDLS(lab, noFilho, limite - 1);
                     if(resultado != NULL)
                         return resultado;
@@ -120,7 +120,7 @@ Node *BuscaProfundidadeLimitada::recursiveDLS(Labirinto lab, Node *atual, int li
                 }
             }
 
-            if (lab.podeMoverEsquerda(x, y)&& (atual->get_acao() != 'D'))
+            if (lab.podeMoverEsquerda(x, y) && (atual->get_acao() != 'D'))
             {
                 Node *noFilho = new Node('E', x, y - 1, atual);
                 this->fat_ramificacao++;

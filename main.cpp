@@ -16,15 +16,14 @@ int main()
     //lab->criaLab(50, "lab4.txt");
 
     fstream log;
-    log.open ("Estatisticas/loglab4.txt", fstream::app);
+    log.open ("Estatisticas/loglab2.txt", fstream::app);
 
-    lab->set_labirinto("Labirintos/lab4.txt");
+    lab->set_labirinto("Labirintos/lab2.txt");
     
     Backtracking* bt = new Backtracking();
     bt->backtracking(*lab);
     log << bt->getEstatisticas();
     log << '\n';
-
 
     BuscaLargura* bl = new BuscaLargura();
     bl->busca_largura(*lab);
@@ -32,10 +31,9 @@ int main()
     log << '\n';
 
     BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
-    bp->busca_profundidade_limitada(*lab, 100);
+    bp->busca_profundidade_limitada(*lab, 45);
     log << bp->getEstatisticas();
     log << '\n';
-    /*
 
     BuscaOrdenada* bo = new BuscaOrdenada();
     bo->buscaOrdenada(*lab);
@@ -56,8 +54,8 @@ int main()
     bIDA->buscaIDA(*lab);
     log << bIDA->getEstatisticas();
     log << '\n';
-*/
     log.close();
     
+    log.close();
     return 0;
 }
