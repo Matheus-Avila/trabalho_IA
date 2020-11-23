@@ -6,7 +6,7 @@ Profundidade: 158
 Total de nos expandidos: 1026
 Total de nos visitados: 1025
 Fator de ramificacao medio: 0.999025
-Tempo de execucao: 7663 microsegundos
+Tempo de execucao: 9387 microsegundos
 
 Busca Largura: 
 Caminho:
@@ -16,7 +16,7 @@ Profundidade: 98
 Total de nos expandidos: 985
 Total de nos visitados: 994
 Fator de ramificacao medio: 1.009137
-Tempo de execucao: 8021 microsegundos
+Tempo de execucao: 8577 microsegundos
 
 Busca Ordenada: 
 Caminho:
@@ -26,7 +26,7 @@ Profundidade: 98
 Total de nos expandidos: 994
 Total de nos visitados: 1003
 Fator de ramificacao medio: 1.009054
-Tempo de execucao: 10079 microsegundos
+Tempo de execucao: 8800 microsegundos
 
 Busca Gulosa: 
 Caminho:
@@ -36,7 +36,7 @@ Profundidade: 152
 Total de nos expandidos: 200
 Total de nos visitados: 236
 Fator de ramificacao medio: 1.180000
-Tempo de execucao: 598 microsegundos
+Tempo de execucao: 569 microsegundos
 
 Busca A*: 
 Caminho:
@@ -46,15 +46,14 @@ Profundidade: 98
 Total de nos expandidos: 137
 Total de nos visitados: 171
 Fator de ramificacao medio: 1.248175
-Tempo de execucao: 374  microsegundos
+Tempo de execucao: 367  microsegundos
 
 Busca IDA: 
 Patamar: 98
 Total de nos expandidos: 137
 Total de nos visitados: 137
 Fator de ramificacao medio: 1.000000
-Tempo de execucao: 279 microsegundos
-Tempo de execucao Total: 283 microsegundos
+Tempo de execucao Total: 281 microsegundos
 Caminho:
 xDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBDDBDBDDDBBBBBBBDDDDBD
 Custo da solucao: 98

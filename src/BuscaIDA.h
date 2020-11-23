@@ -27,8 +27,8 @@ BuscaIDA::~BuscaIDA()
 
 void BuscaIDA::buscaIDA(Labirinto lab)
 {
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     this->estatisticas += "Busca IDA: \n";
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     Node *solution = busca(lab);
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     this->estatisticas += "Tempo de execucao Total: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
@@ -196,29 +196,18 @@ Node *BuscaIDA::busca(Labirinto lab)
         vector<Node *> descartados;
 
         fronteira.push_back(raiz);
-        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
         try
         {
             Node *solution = iterativeA(lab, explorados, fronteira, descartados, patamar);
-            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
             this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
             this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
             this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
-
-            this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " microsegundos" + '\n';
 
             return solution;
         }
         catch (int e)
-        {
-            std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-            this->estatisticas += "Total de nos expandidos: " + to_string(explorados.size()) + '\n';
-            this->estatisticas += "Total de nos visitados: " + to_string(this->fat_ramificacao) + '\n';
-            this->estatisticas += "Fator de ramificacao medio: " + to_string(((float)this->fat_ramificacao/(float)explorados.size())) + '\n';
-            this->estatisticas += "Total de nos descartados: " + to_string(descartados.size()) + '\n';
-            this->estatisticas += "Tempo de execucao: " + to_string(std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) + " milisegundos" + '\n';
-
+        {            
         }
 
         patamar = descartados[0]->getCusto();

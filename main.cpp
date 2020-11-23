@@ -13,13 +13,14 @@ using namespace std;
 int main()
 {
     Labirinto *lab = new Labirinto();
-    //lab->criaLab(50, "lab4.txt");
+    //lab->criaLab(500, "lab6.txt");
+
 
     fstream log;
-    log.open ("Estatisticas/loglab2.txt", fstream::app);
+    log.open ("Estatisticas/loglab6.txt", fstream::app);
 
-    lab->set_labirinto("Labirintos/lab2.txt");
-    
+    lab->set_labirinto("Labirintos/lab6.txt");
+
     Backtracking* bt = new Backtracking();
     bt->backtracking(*lab);
     log << bt->getEstatisticas();
@@ -29,12 +30,12 @@ int main()
     bl->busca_largura(*lab);
     log << bl->getEstatisticas();
     log << '\n';
-
+    /*
     BuscaProfundidadeLimitada* bp = new BuscaProfundidadeLimitada();
     bp->busca_profundidade_limitada(*lab, 45);
     log << bp->getEstatisticas();
     log << '\n';
-
+    */
     BuscaOrdenada* bo = new BuscaOrdenada();
     bo->buscaOrdenada(*lab);
     log << bo->getEstatisticas();
@@ -49,13 +50,13 @@ int main()
     ba->buscaAEstrela(*lab);
     log << ba->getEstatisticas();
     log << '\n';
-
+    
     BuscaIDA* bIDA = new BuscaIDA();
     bIDA->buscaIDA(*lab);
     log << bIDA->getEstatisticas();
     log << '\n';
-    log.close();
     
     log.close();
+    
     return 0;
 }
